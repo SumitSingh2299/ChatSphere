@@ -1,0 +1,23 @@
+# Python backend specific
+/server/venv/
+/server/__pycache__/
+/server/*.pyc
+/server/app.db
+
+# Node.js frontend specific
+/client/node_modules/
+/client/dist/
+/client/.DS_Store
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE and OS files
+.idea/
+.vscode/
+*.DS_Store
+
+# CRITICAL: Secret environment files
+# Never commit your .env files to GitHub!
+.env
+.env.*

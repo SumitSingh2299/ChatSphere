@@ -1,0 +1,17 @@
+{
+  "name": "chatsphere-root",
+  "version": "1.0.0",
+  "description": "Root package for running ChatSphere client and server concurrently.",
+  "main": "index.js",
+  "scripts": {
+    "install-all": "npm install && cd Client && npm install && cd ../Server && pip install -r requirements.txt",
+    "dev": "concurrently \"cd Server && .\\venv\\Scripts\\python.exe -m uvicorn main:app --port 8000\" \"cd Client && npm run dev\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
