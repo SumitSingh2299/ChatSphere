@@ -8,3 +8,4 @@ Flask-SocketIO
 python-dotenv
 werkzeug
 bcrypt
+gunicorn
