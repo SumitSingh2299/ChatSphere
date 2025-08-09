@@ -1,14 +1,30 @@
-from dotenv import load_dotenv
-import os
+from flask import Flask, jsonify
+from flask_pymongo import PyMongo
+from flask_login import LoginManager
+from flask_cors import CORS
+from flask_socketio import SocketIO
+from config import Config
+from bson.objectid import ObjectId
 
-load_dotenv()  # load variables from .env
+mongo = PyMongo()
+login = LoginManager()
+socketio = SocketIO()
+
+@login.user_loader
+def load_user(user_id):
+    from app.models import User
+    user_doc = mongo.db.users.find_one({"_id": ObjectId(user_id)})
+    if user_doc:
+        return User(user_doc)
+    return None
+
+@login.unauthorized_handler
+def unauthorized():
+    return jsonify({'error': 'Unauthorized access'}), 401
 
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
-
-    # Set MONGO_URI from environment
-    app.config["MONGO_URI"] = os.getenv("MONGO_URI")
 
     # Dynamic CORS config
     frontend_urls = app.config.get('FRONTEND_URLS', '')
@@ -28,6 +44,7 @@ def create_app(config_class=Config):
     
     from app.routes.messages import bp as messages_bp
     app.register_blueprint(messages_bp, url_prefix='/api/messages')
+    
     from app.routes.users import bp as users_bp
     app.register_blueprint(users_bp, url_prefix='/api/users')
     
