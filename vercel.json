@@ -13,8 +13,8 @@
     }
   ],
   "env": {
-    "MONGO_URI": "mongodb+srv://Shivam:Shivam%406207@cluster0.kdbdnoz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
-    "SECRET_KEY": "yoursecretkeyhere",
-    "FRONTEND_URLS": "http://localhost:3000,https://your-frontend.vercel.app"
+    "MONGO_URI": "@mongo_uri",
+    "SECRET_KEY": "@secret_key",
+    "FRONTEND_URLS": "@frontend_urls"
   }
 }
