@@ -2,25 +2,19 @@
   "version": 2,
   "builds": [
     {
-      "src": "client/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist"
-      }
-    },
-    {
-      "src": "api/index.py",
+      "src": "server/wsgi.py",
       "use": "@vercel/python"
     }
   ],
-  "rewrites": [
+  "routes": [
     {
-      "source": "/api/(.*)",
-      "destination": "/api/index.py"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/client/$1"
+      "src": "/(.*)",
+      "dest": "server/wsgi.py"
     }
-  ]
+  ],
+  "env": {
+    "MONGO_URI": "mongodb+srv://Shivam:Shivam%406207@cluster0.kdbdnoz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+    "SECRET_KEY": "yoursecretkeyhere",
+    "FRONTEND_URLS": "http://localhost:3000,https://your-frontend.vercel.app"
+  }
 }
